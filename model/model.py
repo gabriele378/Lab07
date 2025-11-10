@@ -1,3 +1,4 @@
+
 from database.museo_DAO import MuseoDAO
 from database.artefatto_DAO import ArtefattoDAO
 
@@ -18,12 +19,22 @@ class Model:
         """Restituisce la lista di tutti gli artefatti filtrati per museo e/o epoca (filtri opzionali)."""
         # TODO
 
+        return ArtefattoDAO.artefatti
+
+
+
     def get_epoche(self):
         """Restituisce la lista di tutte le epoche."""
         # TODO
+
+        return ArtefattoDAO.epoche
+
+
 
     # --- MUSEI ---
     def get_musei(self):
         """ Restituisce la lista di tutti i musei."""
         # TODO
+
+        return MuseoDAO.musei
 
