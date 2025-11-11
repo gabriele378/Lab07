@@ -38,8 +38,8 @@ class View:
         # --- Sezione 2: Filtraggio ---
         # TODO
 
-        self.dropdown_musei = ft.Dropdown(label="Seleziona museo", on_change= self.controller.on_museo_change(e=))
-        self.dropdown_epoche = ft.Dropdown(label= "Seleziona epoca", on_change= self.controller.on_epoca_change(e=))
+        self.dropdown_musei = ft.Dropdown(label="Seleziona museo", on_change= self.controller.on_museo_change)
+        self.dropdown_epoche = ft.Dropdown(label= "Seleziona epoca", on_change= self.controller.on_epoca_change)
 
         # Sezione 3: Artefatti
         # TODO
