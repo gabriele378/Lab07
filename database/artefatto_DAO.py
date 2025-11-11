@@ -11,37 +11,38 @@ class ArtefattoDAO:
         pass
 
     # TODO
-    cnx = ConnessioneDB.get_connection()
-    artefatti = []
-    if cnx is not None:
-        cursor = cnx.cursor()
-        query = """SELECT * from ARTEFATTO
-                    WHERE epoca = COALESCE(%s, epoca)
-                    and museo = COALESCE(%s, museo)`"""
-        cursor.execute(query)
-        for row in cursor:
-            artefatti.append(row)
+    def get_artefatti_filtrati(self, museo= None, epoca= None):
+        cnx = ConnessioneDB.get_connection()
+        artefatti = []
+        if cnx is not None:
+            cursor = cnx.cursor(dictionary=True)
+            query = """SELECT * from ARTEFATTO
+                        WHERE (%s IS NULL OR museo = %s)
+                        AND (%s IS NULL OR epoca = %s)
+                        `"""
+            cursor.execute(query,(museo,museo, epoca, epoca))
+            for row in cursor:
+                artefatti.append(Artefatto(**row))
 
-        cursor.close()
-        cnx.close()
+            cursor.close()
+            cnx.close()
 
-    else:
-        print("Impossibile connettersi")
+        return artefatti
 
-    cnx = ConnessioneDB.get_connection()
-    epoche = []
-    if cnx is not None:
-        cursor = cnx.cursor()
-        query2 = """SELECT DISTICT epoca from ARTEFATTO"""
-        cursor.execute(query2)
-        for row in cursor:
-            artefatti.append(row)
+    def get_epoche(self):
+        cnx = ConnessioneDB.get_connection()
+        epoche = []
+        if cnx is not None:
+            cursor = cnx.cursor()
+            query2 = """SELECT DISTICT epoca from ARTEFATTO"""
+            cursor.execute(query2)
+            for row in cursor:
+                epoche.append(row[3])
 
-        cursor.close()
-        cnx.close()
+            cursor.close()
+            cnx.close()
 
-    else:
-        print("Impossibile connettersi")
+        return epoche
 
 
 

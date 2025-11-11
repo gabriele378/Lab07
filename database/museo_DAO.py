@@ -11,19 +11,18 @@ class MuseoDAO:
         pass
 
     # TODO
+    def get_musei(self):
+        cnx = ConnessioneDB.get_connection()
+        musei = []
+        if cnx is not None:
+            cursor = cnx.cursor()
+            query = """SELECT DISTINCT nome from MUSEO"""
+            cursor.execute(query)
+            for row in cursor:
+                musei.append(row[1])
 
-    cnx = ConnessioneDB.get_connection()
-    musei = []
-    if cnx is not None:
-        cursor = cnx.cursor()
-        query = """SELECT DISTINCT nome from MUSEO"""
-        cursor.execute(query)
-        for row in cursor:
-            musei.append(row)
+            cursor.close()
+            cnx.close()
 
-        cursor.close()
-        cnx.close()
 
-    else:
-        print("Impossibile connettersi")
 
